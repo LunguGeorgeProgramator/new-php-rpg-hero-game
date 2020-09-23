@@ -10,6 +10,7 @@ class Hero
     public $defence;
     public $speed;
     public $luck;
+    public $stats;
 
     function __construct($id, $level, $experience, $name, $health, $strength, $defence, $speed, $luck) {
         $this->id = $id;
@@ -90,6 +91,10 @@ class Hero
         $this->luck;
     }
 
+    function setStats($stats){
+       $this->stats = $stats;
+    }
+
 }
 
 class buildHeroClass {
@@ -100,6 +105,7 @@ class buildHeroClass {
         $statsHero = $db->runQuery('SELECT * FROM `attributes_max_min` WHERE subject_type="hero" and subject_id='.$heroDB[0]['id']);
         $stats = $this->getStats($statsHero);
         $hero = new Hero($heroDB[0]['id'], $heroDB[0]['level'], $heroDB[0]['experience'], $heroDB[0]['name'], $stats['health'], $stats['strength'], $stats['defence'], $stats['speed'], $stats['luck']);
+        $hero->setStats($statsHero);
         return $hero;
     }
 

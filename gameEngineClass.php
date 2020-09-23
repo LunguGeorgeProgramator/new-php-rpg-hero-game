@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 class engine{
 
@@ -17,7 +16,8 @@ class engine{
     }
 
     function monster(){
-        $monsterEncounter = (new DataBase)->runQuery('SELECT `id` FROM `monster` ORDER BY RAND() LIMIT 0,1;');
+        // $monsterEncounter = (new DataBase)->runQuery('SELECT `id` FROM `monster` ORDER BY RAND() LIMIT 0,1;');
+        $monsterEncounter = (new DataBase)->runQuery('SELECT `id` FROM `monster` where id = 1');
         $buildMonster = new buildMonsterClass;
         return $buildMonster->buildMonster($monsterEncounter[0]['id']);
     }
@@ -85,7 +85,7 @@ class engine{
         if($turnCounter === 20) { // turns reached 20 game over
             $stop_battle = true;
             $winner = ($hero->health > $monster->health) ? $hero->name : $monster->name;
-            $log .= "Max number of turns 20 has been reached , winner is ".$winner . "</br>";
+            $log .= "Max number of turns 20 has been reached , winner is " . $winner . "</br>";
         }
 
         $turnCounter++;

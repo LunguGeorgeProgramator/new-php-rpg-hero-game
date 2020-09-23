@@ -31,30 +31,6 @@
             return $this->conn;
         }
 
-        // public function queryRun($query){
-        //     return $this->conn->query($query);
-        // }
-
-        // public function playerDetails($row, $id){
-        //     return (object) array_merge([
-        //         'id' => $row["id"],
-        //         'level' =>  $row["level"],
-        //         'experience' => $row["experience"],
-        //         'name' =>  $row["name"]
-        //     ], $this->getAttributes($id));
-        // }
-    
-        // public function runQuery($query){
-        //     $result = $this->conn->query($query);
-        //     if ($result->num_rows > 0) {
-        //         while($row = $result->fetch_assoc()) {
-        //             return $row;
-        //         }
-        //     } else {
-        //         return [];
-        //     }
-        // }
-
         public function runQuery($query){
             $resultArray = [];
             $result = $this->conn->query($query);
