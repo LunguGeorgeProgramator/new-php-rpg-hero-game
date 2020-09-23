@@ -1,6 +1,6 @@
 <?php
 
-class engine{
+class engine {
 
     public $monster;
     public $hero;
@@ -77,7 +77,7 @@ class engine{
             $defender->health = 0;
             $stop_battle = true;
             $log .= 'Attack from ' . $atacker->name . ".  " .$skill_name . $lucky_damage_pass . " Damage inflicted ".$damage." to ".$defender->name . " health remaning is ".$defender->health." </br>";
-            $log .= 'Battle finished !!!</br>';
+            $log .= 'Battle finished, winner is ' . $atacker->name . ' !!!</br>';
         } else {
             $log .= 'Attack from ' . $atacker->name . ".  " .$skill_name . $lucky_damage_pass . " Damage inflicted ".$damage." to ".$defender->name . " health remaning is ".$defender->health." </br>"; // log battle damage and the defender helth
         }
