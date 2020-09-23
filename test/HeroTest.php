@@ -1,40 +1,41 @@
 <?php
-declare(strict_types=1);
+
+include 'hero.php';
 
 use PHPUnit\Framework\TestCase;
 
 final class HeroTest extends TestCase
 {
-    public function testHeroFindID(): void
-    {
-        $this->assertInstanceOf(
-            Hero::class,
-            Hero::__construct([
-                'id' => 100,
-                'name' => 'Elvis',
-                'experience' => 300.2,
-                'level' => 10,
-                'health' => 100,
-                'strength' => 70,
-                'defence' => 50,
-                'speed' => 20,
-                'luck' => 20.8,
-            ])
-        );
+    protected $hero;
+
+    function populateHero(){
+        return new Hero(1, 2, 333, 'XXXX', 12, 32, 54, 23, 1);
     }
 
-    public function testInvalidID(): void
+    public function testHero()
     {
-        $this->expectException(InvalidArgumentException::class);
+        $hero = $this->populateHero();
+        $this->assertSame($hero->id, 1);
+        $this->assertSame($hero->level, 2);
+        $this->assertSame($hero->experience, 333);
+        $this->assertSame($hero->name, 'XXXX');
+        $this->assertSame($hero->health, 12);
+        $this->assertSame($hero->strength, 32);
+        $this->assertSame($hero->defence, 54);
+        $this->assertSame($hero->speed, 23);
+        $this->assertSame($hero->luck, 1);
+        $this->assertNotEmpty($hero);
+    }
+    
+    public function testHeroUpdate()
+    {
+        $hero = $this->populateHero();
+        $hero->setName('YYY');  
+        $hero->setLevel(5); 
 
-        Hero::getAttributes(null);
+        $this->assertSame($hero->level, 5);
+        $this->assertSame($hero->name, 'YYY');
     }
 
-    public function testHeroID(): void
-    {
-        $this->assertEquals(
-            1,
-            Email::getAttributes(1)
-        );
-    }
+
 }
