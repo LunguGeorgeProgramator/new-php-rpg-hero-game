@@ -23,7 +23,7 @@ class engine {
     }
 
     function figth($hero, $monster, $turn, $log = '', $turnCounter = 1){
-        $atacker = null;
+        $attacker = null;
         $defender = null;
         $stop_battle = false;
         $skill_name = '';
@@ -41,20 +41,20 @@ class engine {
         } 
 
         if($turn['turn'] === 'hero'){
-            $atacker = $hero;
+            $attacker = $hero;
             $defender = $monster;
         } else {
-            $atacker = $monster;
+            $attacker = $monster;
             $defender = $hero;
         }
 
         // set damage
-        $damage = $atacker->strength - $defender->defence; // Damage = Attacker strength – Defender defence
+        $damage = $attacker->strength - $defender->defence; // Damage = Attacker strength – Defender defence
 
 
         // skils encounter
         $skill = $this->skills();
-        if($skill !== null && $skill['skill_type'] === 'attack' && $atacker->name === "Orderus"){
+        if($skill !== null && $skill['skill_type'] === 'attack' && $attacker->name === "Orderus"){
             $oldDamage = $damage;
             $damage = $skill['number_strikes'] * $damage; // 2 strikes results double the damage
             $skill_name = "Orderus activated attack skill '" . $skill['name'] . "' damage increace from ".$oldDamage." To " . $damage ." -> ";
@@ -76,10 +76,10 @@ class engine {
         if($defender->health <= 0) { // stop battle if defender health reaches 0
             $defender->health = 0;
             $stop_battle = true;
-            $log .= 'Attack from ' . $atacker->name . ".  " .$skill_name . $lucky_damage_pass . " Damage inflicted ".$damage." to ".$defender->name . " health remaning is ".$defender->health." </br>";
-            $log .= 'Battle finished, winner is ' . $atacker->name . ' !!!</br>';
+            $log .= 'Attack from ' . $attacker->name . ".  " .$skill_name . $lucky_damage_pass . " Damage inflicted ".$damage." to ".$defender->name . " health remaning is ".$defender->health." </br>";
+            $log .= 'Battle finished, winner is ' . $attacker->name . ' !!!</br>';
         } else {
-            $log .= 'Attack from ' . $atacker->name . ".  " .$skill_name . $lucky_damage_pass . " Damage inflicted ".$damage." to ".$defender->name . " health remaning is ".$defender->health." </br>"; // log battle damage and the defender helth
+            $log .= 'Attack from ' . $attacker->name . ".  " .$skill_name . $lucky_damage_pass . " Damage inflicted ".$damage." to ".$defender->name . " health remaning is ".$defender->health." </br>"; // log battle damage and the defender helth
         }
 
         if($turnCounter === 20) { // turns reached 20 game over
