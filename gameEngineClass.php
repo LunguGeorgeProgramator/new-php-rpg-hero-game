@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-class engine {
+class engine{
 
     public $monster;
     public $hero;
@@ -17,16 +17,17 @@ class engine {
     }
 
     function monster(){
-        $db = new DataBase;
-        $monsterEncounter = $db->runQuery('SELECT `id` FROM `monster` ORDER BY RAND() LIMIT 0,1;');
+        $monsterEncounter = (new DataBase)->runQuery('SELECT `id` FROM `monster` ORDER BY RAND() LIMIT 0,1;');
         $buildMonster = new buildMonsterClass;
         return $buildMonster->buildMonster($monsterEncounter[0]['id']);
     }
 
-    function figth($hero, $monster, $turn, $log = ''){
+    function figth($hero, $monster, $turn, $log = '', $turnCounter = 1){
         $atacker = null;
         $defender = null;
         $stop_battle = false;
+        $skill_name = '';
+        $lucky_damage_pass = '';
         
         // set turn to atack and defence
         if(empty($turn)){
@@ -50,24 +51,46 @@ class engine {
         // set damage
         $damage = $atacker->strength - $defender->defence; // Damage = Attacker strength – Defender defence
 
+
+        // skils encounter
+        $skill = $this->skills();
+        if($skill !== null && $skill['skill_type'] === 'attack' && $atacker->name === "Orderus"){
+            $oldDamage = $damage;
+            $damage = $skill['number_strikes'] * $damage; // 2 strikes results double the damage
+            $skill_name = "Orderus activated attack skill '" . $skill['name'] . "' damage increace from ".$oldDamage." To " . $damage ." -> ";
+        } 
+
+        if($skill !== null && $skill['skill_type'] === 'defence' && $defender->name === "Orderus"){
+            $oldDamage = $damage;
+            $damage = ($skill['number_strikes'] / 100) * $damage; // 50 percent of damage/ half of the damage, defence skill
+            $skill_name = "Orderus activated defence skill '" . $skill['name'] . "' damage reduce from ".$oldDamage." To " . $damage ." -> ";
+        } 
+
         if(rand(0, 100) < $defender->luck ){ // the defender gets lucky that turn.
             $damage = 0;
+            $lucky_damage_pass = ' Luck change to get 0 damage occured. ';
         }
 
         $defender->setHealth($defender->health - $damage); // The damage is subtracted from the defender’s health.
-
-        if($defender->health <= 0){
-
+     
+        if($defender->health <= 0) { // stop battle if defender health reaches 0
+            $defender->health = 0;
             $stop_battle = true;
-            $log .= "Battle finished for ". $defender->name . "</br>";
-
+            $log .= 'Attack from ' . $atacker->name . ".  " .$skill_name . $lucky_damage_pass . " Damage inflicted ".$damage." to ".$defender->name . " health remaning is ".$defender->health." </br>";
+            $log .= 'Battle finished !!!</br>';
         } else {
-
-            $log .= "Damage ".$damage." to ".$defender->name . "</br>";
-
+            $log .= 'Attack from ' . $atacker->name . ".  " .$skill_name . $lucky_damage_pass . " Damage inflicted ".$damage." to ".$defender->name . " health remaning is ".$defender->health." </br>"; // log battle damage and the defender helth
         }
 
-        return [$hero, $monster, $turn, $stop_battle, $log];
+        if($turnCounter === 20) { // turns reached 20 game over
+            $stop_battle = true;
+            $winner = ($hero->health > $monster->health) ? $hero->name : $monster->name;
+            $log .= "Max number of turns 20 has been reached , winner is ".$winner . "</br>";
+        }
+
+        $turnCounter++;
+
+        return [$hero, $monster, $turn, $stop_battle, $log, $turnCounter];
     }
 
     function determinFirstTurnToAttack($hero, $monster, $turn){ // The first attack
@@ -87,84 +110,22 @@ class engine {
         return $turn;
     }
 
+    function skills(){
+        $skills = (new DataBase)->runQuery(
+            'SELECT s.* FROM `hero` h
+            INNER JOIN heros_skills hs on hs.id_hero = h.id
+            inner join skill s on s.id = hs.id_skill
+            WHERE h.id = 1'
+        );
+        foreach($skills as $skill){
+            if(rand(0, 100) < $skills[0]['skill_chance']) { // check the chance of the skill to occur
+                return $skill;
+            }
+        }
+        return null;
+    }
+
 
 }
 
-
-$game = new engine;
-
-if(!isset($_SESSION['turn'])){
-    $_SESSION['turn'] = [];
-}
-
-if(!isset($_SESSION['hero'])){
-    $_SESSION['hero'] =  $game->hero;
-}
-
-if(!isset($_SESSION['monster'])){
-    $_SESSION['monster'] =  $game->monster;
-}
-
-if(!isset($_SESSION['battle_logs'])){
-    $_SESSION['battle_logs'] = "";
-}
-
-$results = $game->figth($_SESSION['hero'], $_SESSION['monster'], $_SESSION['turn'], $_SESSION['battle_logs']);
-
-$_SESSION['hero'] = $results[0];
-$_SESSION['monster'] = $results[1];
-$_SESSION['turn'] = $results[2];
-$_SESSION['battle_logs'] = $results[4];
-
-var_dump('Hero ', $_SESSION['hero']);
-var_dump('Monster ', $_SESSION['monster']);
-echo $_SESSION['battle_logs'];
-
-if(isset($results) && $results[3] === true){
-    session_destroy();
-} 
-
-// var_dump($_SESSION['hero'], $_SESSION['monster']);
-
-// var_dump($game->figth($_SESSION['hero'], $_SESSION['monster'], $_SESSION['turn']));
-
-
-
-
-
-// $buildHero = new buildHeroClass;
-// $hero  = $buildHero->buildHero();
-
-
-
-// $heroDB = $db->runQuery('SELECT * FROM hero where id=1');
- 
-// $heroSkillsDB = $db->runQuery(
-//     'SELECT s.* FROM `hero` h
-//     INNER JOIN heros_skills hs on hs.id_hero = h.id
-//     inner join skill s on s.id = hs.id_skill
-//     WHERE h.id = 1'
-// );
-// $hero = new Hero(1, 213123, 'xxx', 32, 65, 76, 43, 99, 7);
-// $hero->setLuck(999999999);
-// $heroSkillsDB = $db->runQuery('SELECT s.* FROM `hero` h
-// INNER JOIN heros_skills hs on hs.id_hero = h.id
-// inner join skill s on s.id = hs.id_skill
-// WHERE h.id = 1');
-// var_dump($hero);
-
-// var_dump($monster);
-
-// var_dump($monsterEncounter[0]['id']);
-
-/// 
-
-// class buildHero extends Hero {
-
-//     public $hero;
-
-//     public function buildHero(){
-//         parent::
-//     }
-// }
 ?>
