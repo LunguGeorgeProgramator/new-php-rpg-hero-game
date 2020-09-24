@@ -3,12 +3,12 @@
 
 How to run test:
 
-    C:\wamp64\www\new-php-rpg-hero-game>vendor\bin\phpunit --verbose test\GameTest
+    C:\wamp64\www\new-php-rpg-hero-game>vendor\bin\phpunit --verbose tests\GameTest
 
     cd \wamp64\www\new-php-rpg-hero-game
 
-    vendor\bin\phpunit --verbose test\GameTest
+    vendor\bin\phpunit --verbose tests\GameTest
   
  Comand to run all tests at once:
  
-    vendor\bin\phpunit --verbose test
+    vendor\bin\phpunit --verbose tests
