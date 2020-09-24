@@ -1,22 +1,22 @@
 <?php
 
-include_once 'hero.php';
+include_once 'monster.php';
 
 use PHPUnit\Framework\TestCase;
 
-final class HeroTest extends TestCase
+final class MonsterTest extends TestCase
 {
-    private function populateHero(){
-        return new Hero(1, 2, 333, 'XXXX', 12, 32, 54, 23, 1);
+    private function populateMonster(){
+        return new Monster(1, 2, 333, 'ttt', 12, 32, 54, 23, 1);
     }
 
-    public function testHero()
+    function testHero()
     {
-        $hero = $this->populateHero();
+        $hero = $this->populateMonster();
         $this->assertSame($hero->id, 1);
         $this->assertSame($hero->level, 2);
         $this->assertSame($hero->experience, 333);
-        $this->assertSame($hero->name, 'XXXX');
+        $this->assertSame($hero->name, 'ttt');
         $this->assertSame($hero->health, 12);
         $this->assertSame($hero->strength, 32);
         $this->assertSame($hero->defence, 54);
@@ -25,14 +25,14 @@ final class HeroTest extends TestCase
         $this->assertNotEmpty($hero);
     }
     
-    public function testHeroUpdate()
+    function testHeroUpdate()
     {
-        $hero = $this->populateHero();
-        $hero->setName('YYY');  
+        $hero = $this->populateMonster();
+        $hero->setName('BUC');  
         $hero->setLevel(5); 
 
         $this->assertSame($hero->level, 5);
-        $this->assertSame($hero->name, 'YYY');
+        $this->assertSame($hero->name, 'BUC');
     }
 
 }

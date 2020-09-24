@@ -10,11 +10,11 @@ use PHPUnit\Framework\TestCase;
 final class GameTest extends TestCase
 {
 
-    function populateHero(){
+    private function populateHero(){
         return new Hero(1, 2, 333, 'XXXX', 12, 32, 54, 23, 1);
     }
 
-    function populateMonster(){
+    private function populateMonster(){
         return new Monster(1, 5, 243, 'ZZZ', 143, 322, 534, 22, 33);
     }
 
@@ -37,6 +37,13 @@ final class GameTest extends TestCase
         } catch (Exception $e) {
             $this->assertNull($result);
         }
+    }
+
+    function testLogsMessages(){
+        $engine = new engine;
+        $results = $engine->figth($this->populateHero(), $this->populateMonster(), [], '', 1);
+        $this->assertStringContainsString('Damage', $results[4]);
+
     }
     
 
