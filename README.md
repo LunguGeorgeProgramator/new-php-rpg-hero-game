@@ -1,4 +1,7 @@
 # new-php-rpg-hero-game
+
+ PHP, Apache, MySQL, phpunit.
+
 To set the project just clone with git:
 
     git clone https://github.com/LunguGeorgeProgramator/new-php-rpg-hero-game
