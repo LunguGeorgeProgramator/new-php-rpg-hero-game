@@ -8,3 +8,7 @@ How to run test:
     cd \wamp64\www\new-php-rpg-hero-game
 
     vendor\bin\phpunit --verbose test\GameTest
+  
+ Comand to run all tests at once:
+ 
+    vendor\bin\phpunit --verbose test
