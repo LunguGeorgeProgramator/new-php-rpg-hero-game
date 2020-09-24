@@ -6,7 +6,7 @@ To set the project just clone with git:
 
     git clone https://github.com/LunguGeorgeProgramator/new-php-rpg-hero-game
     
-Run the game in proser and just click button "next turn".
+Run the game in browser and just click button "next turn".
 
 How to run test:
 
