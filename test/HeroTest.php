@@ -1,6 +1,6 @@
 <?php
 
-include 'hero.php';
+include_once 'hero.php';
 
 use PHPUnit\Framework\TestCase;
 

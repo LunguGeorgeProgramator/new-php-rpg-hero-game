@@ -1,9 +1,9 @@
 <?php
 
-include 'database.php';
-include 'hero.php';
-include 'monster.php';
-include 'gameEngineClass.php';
+include_once 'database.php';
+include_once 'hero.php';
+include_once 'monster.php';
+include_once 'gameEngineClass.php';
 
 use PHPUnit\Framework\TestCase;
 
@@ -18,7 +18,7 @@ final class GameTest extends TestCase
         return new Monster(1, 5, 243, 'ZZZ', 143, 322, 534, 22, 33);
     }
 
-    public function testFirstTurnFunction()
+    function testFirstTurnFunction()
     {
         $engine = new engine;
         $hero = $this->populateHero();
@@ -27,6 +27,16 @@ final class GameTest extends TestCase
         
         $this->assertSame($result["turn"], "hero");
         $this->assertNotEmpty($result);
+    }
+
+    function testSkillsFunction(){
+        $engine = new engine;
+        $result = $engine->skills(); // function gives 2 resonses return random array of results or null
+        try {
+            $this->assertIsArray($result);
+        } catch (Exception $e) {
+            $this->assertNull($result);
+        }
     }
     
 
