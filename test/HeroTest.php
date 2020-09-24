@@ -13,6 +13,9 @@ final class HeroTest extends TestCase
     public function testHero()
     {
         $hero = $this->populateHero();
+        
+        $this->assertInstanceOf(Hero::class, $hero);
+
         $this->assertSame($hero->id, 1);
         $this->assertSame($hero->level, 2);
         $this->assertSame($hero->experience, 333);

@@ -12,27 +12,30 @@ final class MonsterTest extends TestCase
 
     function testHero()
     {
-        $hero = $this->populateMonster();
-        $this->assertSame($hero->id, 1);
-        $this->assertSame($hero->level, 2);
-        $this->assertSame($hero->experience, 333);
-        $this->assertSame($hero->name, 'ttt');
-        $this->assertSame($hero->health, 12);
-        $this->assertSame($hero->strength, 32);
-        $this->assertSame($hero->defence, 54);
-        $this->assertSame($hero->speed, 23);
-        $this->assertSame($hero->luck, 1);
-        $this->assertNotEmpty($hero);
+        $monster = $this->populateMonster();
+
+        $this->assertInstanceOf(Monster::class, $monster);
+
+        $this->assertSame($monster->id, 1);
+        $this->assertSame($monster->level, 2);
+        $this->assertSame($monster->experience, 333);
+        $this->assertSame($monster->name, 'ttt');
+        $this->assertSame($monster->health, 12);
+        $this->assertSame($monster->strength, 32);
+        $this->assertSame($monster->defence, 54);
+        $this->assertSame($monster->speed, 23);
+        $this->assertSame($monster->luck, 1);
+        $this->assertNotEmpty($monster);
     }
     
     function testHeroUpdate()
     {
-        $hero = $this->populateMonster();
-        $hero->setName('BUC');  
-        $hero->setLevel(5); 
+        $monster = $this->populateMonster();
+        $monster->setName('BUC');  
+        $monster->setLevel(5); 
 
-        $this->assertSame($hero->level, 5);
-        $this->assertSame($hero->name, 'BUC');
+        $this->assertSame($monster->level, 5);
+        $this->assertSame($monster->name, 'BUC');
     }
 
 }
