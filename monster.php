@@ -1,16 +1,16 @@
 <?php
 class Monster
 {
-    public $id;
-    public $level;
-    public $experience;
-    public $name;
-    public $health;
-    public $strength;
-    public $defence;
-    public $speed;
-    public $luck;
-    public $stats;
+    private $id;
+    private $level;
+    private $experience;
+    private $name;
+    private $health;
+    private $strength;
+    private $defence;
+    private $speed;
+    private $luck;
+    private $stats;
 
     function __construct($id, $level, $experience, $name, $health, $strength, $defence, $speed, $luck) {
         $this->id = $id;
@@ -22,6 +22,10 @@ class Monster
         $this->defence = $defence;
         $this->speed = $speed;
         $this->luck = $luck;
+    }
+
+    function setId($id){
+        $this->id = $id;
     }
 
     function setLevel($level){
@@ -56,39 +60,47 @@ class Monster
         $this->luck = $luck;
     }
 
+    function getId(){
+        return $this->id;
+    }
+
     function getLevel(){
-        $this->level;
+        return $this->level;
     }
 
 
     function getExperience(){
-        $this->experience;
+        return $this->experience;
     }
 
 
     function getName(){
-        $this->name;
+        return $this->name;
     }
 
 
     function getHealth(){
-        $this->health;
+        return $this->health;
     }
 
     function getStrength(){
-        $this->strength;
+        return $this->strength;
     }
 
     function getDefence(){
-        $this->defence;
+        return $this->defence;
     }
     
     function getSpeed(){
-        $this->speed;
+        return $this->speed;
     }
 
     function getLuck(){
-        $this->luck;
+        return $this->luck;
+    }
+
+    function getStats(){
+        return $this->stats;
     }
 
     function setStats($stats){
@@ -100,16 +112,28 @@ class Monster
 class buildMonsterClass {
 
     public function buildMonster($id = 1){
+        $query_monster = 'SELECT * FROM monster where id=' . $id;
         $db = new DataBase;
-        $monsterDB = $db->runQuery('SELECT * FROM monster where id='.$id);
-        $statsMonster = $db->runQuery('SELECT * FROM `attributes_max_min` WHERE subject_type="monster" and subject_id='.$monsterDB[0]['id']);
-        $stats = $this->getStats($statsMonster);
-        $monster = new Hero($monsterDB[0]['id'], $monsterDB[0]['level'], $monsterDB[0]['experience'], $monsterDB[0]['name'], $stats['health'], $stats['strength'], $stats['defence'], $stats['speed'], $stats['luck']);
+        $monsterDB = $db->runQuery($query_monster);
+        $query_attributes = 'SELECT * FROM `attributes_max_min` WHERE subject_type="monster" and subject_id=' . $monsterDB[0]['id'];
+        $statsMonster = $db->runQuery($query_attributes);
+        $stats = $this->getDBStats($statsMonster);
+        $monster = new Monster(
+            $monsterDB[0]['id'], 
+            $monsterDB[0]['level'], 
+            $monsterDB[0]['experience'], 
+            $monsterDB[0]['name'], 
+            $stats['health'], 
+            $stats['strength'], 
+            $stats['defence'], 
+            $stats['speed'], 
+            $stats['luck']
+        );
         $monster->setStats($statsMonster);
         return $monster;
     }
 
-    public function getStats($statsMonster){
+    public function getDBStats($statsMonster){
         $stats = [
             'health' => 0,
             'strength' => 0,
