@@ -1,10 +1,10 @@
 <LINK REL=StyleSheet HREF="custom.css" TITLE="Contemporary">
 <?php
-include 'database.php';
-include 'hero.php';
-include 'monster.php';
-include 'gameEngineClass.php';
-include 'logger.php';
+include 'class/database.php';
+include 'class/hero.php';
+include 'class/monster.php';
+include 'class/gameEngineClass.php';
+include 'class/logger.php';
 session_start();
 // session_destroy();
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-include_once 'monster.php';
+include_once 'class/monster.php';
 
 use PHPUnit\Framework\TestCase;
 
@@ -16,15 +16,15 @@ final class MonsterTest extends TestCase
 
         $this->assertInstanceOf(Monster::class, $monster);
 
-        $this->assertSame($monster->id, 1);
-        $this->assertSame($monster->level, 2);
-        $this->assertSame($monster->experience, 333);
-        $this->assertSame($monster->name, 'ttt');
-        $this->assertSame($monster->health, 12);
-        $this->assertSame($monster->strength, 32);
-        $this->assertSame($monster->defence, 54);
-        $this->assertSame($monster->speed, 23);
-        $this->assertSame($monster->luck, 1);
+        $this->assertSame($monster->getId(), 1);
+        $this->assertSame($monster->getLevel(), 2);
+        $this->assertSame($monster->getExperience(), 333);
+        $this->assertSame($monster->getName(), 'ttt');
+        $this->assertSame($monster->getHealth(), 12);
+        $this->assertSame($monster->getStrength(), 32);
+        $this->assertSame($monster->getDefence(), 54);
+        $this->assertSame($monster->getSpeed(), 23);
+        $this->assertSame($monster->getLuck(), 1);
         $this->assertNotEmpty($monster);
     }
     
@@ -34,8 +34,8 @@ final class MonsterTest extends TestCase
         $monster->setName('BUC');  
         $monster->setLevel(5); 
 
-        $this->assertSame($monster->level, 5);
-        $this->assertSame($monster->name, 'BUC');
+        $this->assertSame($monster->getLevel(), 5);
+        $this->assertSame($monster->getName(), 'BUC');
     }
 
 }

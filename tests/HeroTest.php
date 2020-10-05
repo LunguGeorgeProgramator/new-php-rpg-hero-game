@@ -1,13 +1,23 @@
 <?php
 
-include_once 'hero.php';
+include_once 'class/hero.php';
 
 use PHPUnit\Framework\TestCase;
 
 final class HeroTest extends TestCase
 {
     private function populateHero(){
-        return new Hero(1, 2, 333, 'XXXX', 12, 32, 54, 23, 1);
+        $hero = new Hero();
+        $hero->setId(1);
+        $hero->setLevel(2);
+        $hero->setExperience(333);
+        $hero->setName('XXXX');
+        $hero->setHealth(12);
+        $hero->setStrength(32);
+        $hero->setDefence(54);
+        $hero->setSpeed(23);
+        $hero->setLuck(1);
+        return $hero;
     }
 
     public function testHero()
@@ -16,15 +26,15 @@ final class HeroTest extends TestCase
         
         $this->assertInstanceOf(Hero::class, $hero);
 
-        $this->assertSame($hero->id, 1);
-        $this->assertSame($hero->level, 2);
-        $this->assertSame($hero->experience, 333);
-        $this->assertSame($hero->name, 'XXXX');
-        $this->assertSame($hero->health, 12);
-        $this->assertSame($hero->strength, 32);
-        $this->assertSame($hero->defence, 54);
-        $this->assertSame($hero->speed, 23);
-        $this->assertSame($hero->luck, 1);
+        $this->assertSame($hero->getId(), 1);
+        $this->assertSame($hero->getLevel(), 2);
+        $this->assertSame($hero->getExperience(), 333);
+        $this->assertSame($hero->getName(), 'XXXX');
+        $this->assertSame($hero->getHealth(), 12);
+        $this->assertSame($hero->getStrength(), 32);
+        $this->assertSame($hero->getDefence(), 54);
+        $this->assertSame($hero->getSpeed(), 23);
+        $this->assertSame($hero->getLuck(), 1);
         $this->assertNotEmpty($hero);
     }
     
@@ -34,8 +44,8 @@ final class HeroTest extends TestCase
         $hero->setName('YYY');  
         $hero->setLevel(5); 
 
-        $this->assertSame($hero->level, 5);
-        $this->assertSame($hero->name, 'YYY');
+        $this->assertSame($hero->getLevel(), 5);
+        $this->assertSame($hero->getName(), 'YYY');
     }
 
 }

@@ -1,9 +1,10 @@
 <?php
 
-include_once 'database.php';
-include_once 'hero.php';
-include_once 'monster.php';
-include_once 'gameEngineClass.php';
+include_once 'class/database.php';
+include_once 'class/hero.php';
+include_once 'class/monster.php';
+include_once 'class/gameEngineClass.php';
+include_once 'class/logger.php';
 
 use PHPUnit\Framework\TestCase;
 
@@ -11,7 +12,17 @@ final class GameTest extends TestCase
 {
 
     private function populateHero(){
-        return new Hero(1, 2, 333, 'XXXX', 12, 32, 54, 23, 1);
+        $hero = new Hero();
+        $hero->setId(1);
+        $hero->setLevel(5);
+        $hero->setExperience(333);
+        $hero->setName('XXXX');
+        $hero->setHealth(12);
+        $hero->setStrength(32);
+        $hero->setDefence(54);
+        $hero->setSpeed(23);
+        $hero->setLuck(1);
+        return $hero;
     }
 
     private function populateMonster(){
@@ -41,8 +52,8 @@ final class GameTest extends TestCase
 
     function testLogsMessages(){
         $engine = new engine;
-        $results = $engine->figth($this->populateHero(), $this->populateMonster(), [], '', 1);
-        $this->assertStringContainsString('Damage', $results[4]);
+        $results = $engine->figth($this->populateHero(), $this->populateMonster(), [], 1, Logger::getInstance());
+        $this->assertStringContainsString('Damage', $results[5]->getLog());
 
     }
     
