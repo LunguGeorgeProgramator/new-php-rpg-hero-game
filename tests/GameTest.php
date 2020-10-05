@@ -2,7 +2,9 @@
 
 include_once 'class/database.php';
 include_once 'class/hero.php';
+include_once 'class/heroBuild.php';
 include_once 'class/monster.php';
+include_once 'class/monsterBuild.php';
 include_once 'class/gameEngineClass.php';
 include_once 'class/logger.php';
 

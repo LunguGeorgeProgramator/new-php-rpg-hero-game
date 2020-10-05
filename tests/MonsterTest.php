@@ -1,6 +1,7 @@
 <?php
 
 include_once 'class/monster.php';
+include_once 'class/monsterBuild.php';
 
 use PHPUnit\Framework\TestCase;
 

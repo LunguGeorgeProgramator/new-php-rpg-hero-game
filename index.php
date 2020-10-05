@@ -2,7 +2,9 @@
 <?php
 include 'class/database.php';
 include 'class/hero.php';
+include 'class/heroBuild.php';
 include 'class/monster.php';
+include 'class/monsterBuild.php';
 include 'class/gameEngineClass.php';
 include 'class/logger.php';
 session_start();

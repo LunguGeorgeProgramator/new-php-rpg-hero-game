@@ -1,6 +1,7 @@
 <?php
 
 include_once 'class/hero.php';
+include_once 'class/heroBuild.php';
 
 use PHPUnit\Framework\TestCase;
 
