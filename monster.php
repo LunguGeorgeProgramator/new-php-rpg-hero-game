@@ -112,11 +112,13 @@ class Monster
 class buildMonsterClass {
 
     public function buildMonster($id = 1){
-        $query_monster = 'SELECT * FROM monster where id=' . $id;
         $db = new DataBase;
-        $monsterDB = $db->runQuery($query_monster);
-        $query_attributes = 'SELECT * FROM `attributes_max_min` WHERE subject_type="monster" and subject_id=' . $monsterDB[0]['id'];
-        $statsMonster = $db->runQuery($query_attributes);
+        $monsterDB = $db->runQuery(
+            'SELECT * FROM monster where id=' . $id
+        );
+        $statsMonster = $db->runQuery(
+            'SELECT * FROM `attributes_max_min` WHERE subject_type="monster" and subject_id=' . $monsterDB[0]['id']
+        );
         $stats = $this->getDBStats($statsMonster);
         $monster = new Monster(
             $monsterDB[0]['id'], 

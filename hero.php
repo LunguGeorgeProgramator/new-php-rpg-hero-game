@@ -115,8 +115,14 @@ class buildHeroClass extends Hero {
 
     public function buildHero(){
         $db = new DataBase;
-        $heroDB = $db->runQuery('SELECT * FROM hero where id=1');
-        $statsHero = $db->runQuery('SELECT * FROM `attributes_max_min` WHERE subject_type="hero" and subject_id='.$heroDB[0]['id']);
+        $heroDB = $db->runQuery(
+            'SELECT * FROM hero where id=1'
+        );
+        $statsHero = $db->runQuery(
+            'SELECT *
+             FROM `attributes_max_min` 
+             WHERE subject_type="hero" and subject_id='.$heroDB[0]['id']
+        );
         $stats = $this->getDBStats($statsHero);
         $this->setId($heroDB[0]['id']);
         $this->setLevel($heroDB[0]['level']);
