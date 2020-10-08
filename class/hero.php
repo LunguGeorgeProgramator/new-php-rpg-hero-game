@@ -1,111 +1,23 @@
 <?php
-class Hero
+
+class Hero extends Player
 {
-    private $id;
-    private $level;
-    private $experience;
-    private $name;
-    private $health;
-    private $strength;
-    private $defence;
-    private $speed;
-    private $luck;
-    private $stats;
+    function skills(){
 
-    // function __construct($id, $level, $experience, $name, $health, $strength, $defence, $speed, $luck) {
-    //     $this->id = $id;
-    //     $this->level = $level;
-    //     $this->experience = $experience;
-    //     $this->name = $name;
-    //     $this->health = $health;
-    //     $this->strength = $strength;
-    //     $this->defence = $defence;
-    //     $this->speed = $speed;
-    //     $this->luck = $luck;
-    // }
+        $skills = (new DataBase)->runQuery(
+            'SELECT s.* FROM `hero` h
+            INNER JOIN heros_skills hs on hs.id_hero = h.id
+            inner join skill s on s.id = hs.id_skill
+            WHERE h.id = 1'
+        );
 
-    function getId(){
-        return $this->id;
+        foreach($skills as $skill){
+            if(rand(0, 100) < $skills[0]['skill_chance']) { // check the chance of the skill to occur
+                return $skill;
+            }
+        }
+
+        return null;
     }
-
-    function getLevel(){
-        return $this->level;
-    }
-
-
-    function getExperience(){
-        return $this->experience;
-    }
-
-
-    function getName(){
-        return $this->name;
-    }
-
-
-    function getHealth(){
-        return $this->health;
-    }
-
-    function getStrength(){
-        return $this->strength;
-    }
-
-    function getDefence(){
-        return $this->defence;
-    }
-    
-    function getSpeed(){
-        return $this->speed;
-    }
-
-    public function getLuck(){
-        return $this->luck;
-    }
-
-    public function getStats(){
-        return $this->stats;
-    }
-
-    function setId($id){
-        $this->id = $id;
-    }
-
-    function setLevel($level){
-        $this->level = $level;
-    }
-
-    function setExperience($experience){
-        $this->experience = $experience;
-    }
-
-    function setName($name){
-        $this->name = $name;
-    }
-
-    function setHealth($health){
-        $this->health = $health;
-    }
-
-    function setStrength($strength){
-        $this->strength = $strength;
-    }
-
-    function setDefence($defence){
-        $this->defence = $defence;
-    }
-
-    function setSpeed($speed){
-        $this->speed = $speed;
-    }
-
-    public function setLuck($luck){
-        $this->luck = $luck;
-    }
-
-    public function setStats($stats){
-        $this->stats = $stats;
-     }
-
 }
 ?>

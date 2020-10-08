@@ -1,17 +1,28 @@
 <?php
 
+include_once 'class/player.php';
 include_once 'class/monster.php';
-include_once 'class/monsterBuild.php';
 
 use PHPUnit\Framework\TestCase;
 
 final class MonsterTest extends TestCase
 {
+
     private function populateMonster(){
-        return new Monster(1, 2, 333, 'ttt', 12, 32, 54, 23, 1);
+        $monster = new Monster();
+        $monster->setId(1);
+        $monster->setLevel(2);
+        $monster->setExperience(333);
+        $monster->setName('ttt');
+        $monster->setHealth(12);
+        $monster->setStrength(32);
+        $monster->setDefence(54);
+        $monster->setSpeed(23);
+        $monster->setLuck(1);
+        return $monster;
     }
 
-    function testHero()
+    function testMonster()
     {
         $monster = $this->populateMonster();
 
@@ -29,7 +40,7 @@ final class MonsterTest extends TestCase
         $this->assertNotEmpty($monster);
     }
     
-    function testHeroUpdate()
+    function testMonsterUpdate()
     {
         $monster = $this->populateMonster();
         $monster->setName('BUC');  

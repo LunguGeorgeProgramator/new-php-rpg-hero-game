@@ -1,7 +1,7 @@
 <?php
 
+include_once 'class/player.php';
 include_once 'class/hero.php';
-include_once 'class/heroBuild.php';
 
 use PHPUnit\Framework\TestCase;
 
@@ -37,6 +37,7 @@ final class HeroTest extends TestCase
         $this->assertSame($hero->getSpeed(), 23);
         $this->assertSame($hero->getLuck(), 1);
         $this->assertNotEmpty($hero);
+        
     }
     
     public function testHeroUpdate()
@@ -47,6 +48,16 @@ final class HeroTest extends TestCase
 
         $this->assertSame($hero->getLevel(), 5);
         $this->assertSame($hero->getName(), 'YYY');
+    }
+
+    function testSkillsFunction(){
+        $hero = $this->populateHero();
+        $result = $hero->skills(); // function gives 2 resonses return random array of results or null
+        try {
+            $this->assertIsArray($result);
+        } catch (Exception $e) {
+            $this->assertNull($result);
+        }
     }
 
 }

@@ -11,15 +11,15 @@ class engine {
     }
 
     function hero(){
-        $buildHero = new buildHeroClass;
-        return $buildHero->buildHero();
+        $buildHero = new PlayerFactory;
+        return $buildHero->createPlayer('hero');
     }
 
     function monster(){
         // $monsterEncounter = (new DataBase)->runQuery('SELECT `id` FROM `monster` ORDER BY RAND() LIMIT 0,1;');
         $monsterEncounter = (new DataBase)->runQuery('SELECT `id` FROM `monster` where id = 1');
-        $buildMonster = new buildMonsterClass;
-        return $buildMonster->buildMonster($monsterEncounter[0]['id']);
+        $buildMonster = new PlayerFactory;
+        return $buildMonster->createPlayer('monster', $monsterEncounter[0]['id']);
     }
 
     function figth($hero, $monster, $turn, $turnCounter = 1, $log_pass = ''){
@@ -51,9 +51,8 @@ class engine {
         // set damage
         $damage = $attacker->getStrength() - $defender->getDefence(); // Damage = Attacker strength – Defender defence
 
-
         // skils encounter
-        $skill = $this->skills();
+        $skill = $hero->skills();
         if($skill !== null && $skill['skill_type'] === 'attack' && $attacker->getName() === "Orderus"){
             $oldDamage = $damage;
             $damage = $skill['number_strikes'] * $damage; // 2 strikes results double the damage
@@ -94,6 +93,7 @@ class engine {
     }
 
     function determinFirstTurnToAttack($hero, $monster, $turn){ // The first attack
+
         if ($monster->getSpeed() > $hero->getSpeed()) { 
             $turn = ['turn' => 'monster', 'id' => $monster->getId()];
         } elseif ($monster->getSpeed() < $hero->getSpeed()) {
@@ -107,23 +107,8 @@ class engine {
                 $turn = ['turn' => 'hero', 'id' => $hero->getId()];
             }
         }
+
         return $turn;
-    }
-
-    function skills(){
-        $skills = (new DataBase)->runQuery(
-            'SELECT s.* FROM `hero` h
-            INNER JOIN heros_skills hs on hs.id_hero = h.id
-            inner join skill s on s.id = hs.id_skill
-            WHERE h.id = 1'
-        );
-
-        foreach($skills as $skill){
-            if(rand(0, 100) < $skills[0]['skill_chance']) { // check the chance of the skill to occur
-                return $skill;
-            }
-        }
-        return null;
     }
 
 

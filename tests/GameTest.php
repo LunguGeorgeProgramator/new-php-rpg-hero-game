@@ -1,10 +1,10 @@
 <?php
 
 include_once 'class/database.php';
+include_once 'class/player.php';
 include_once 'class/hero.php';
-include_once 'class/heroBuild.php';
 include_once 'class/monster.php';
-include_once 'class/monsterBuild.php';
+include_once 'class/playerFactory.php';
 include_once 'class/gameEngineClass.php';
 include_once 'class/logger.php';
 
@@ -28,7 +28,17 @@ final class GameTest extends TestCase
     }
 
     private function populateMonster(){
-        return new Monster(1, 5, 243, 'ZZZ', 143, 322, 534, 22, 33);
+        $monster = new Monster();
+        $monster->setId(1);
+        $monster->setLevel(2);
+        $monster->setExperience(333);
+        $monster->setName('ttt');
+        $monster->setHealth(12);
+        $monster->setStrength(32);
+        $monster->setDefence(54);
+        $monster->setSpeed(23);
+        $monster->setLuck(1);
+        return $monster;
     }
 
     function testFirstTurnFunction()
@@ -40,16 +50,6 @@ final class GameTest extends TestCase
         
         $this->assertSame($result["turn"], "hero");
         $this->assertNotEmpty($result);
-    }
-
-    function testSkillsFunction(){
-        $engine = new engine;
-        $result = $engine->skills(); // function gives 2 resonses return random array of results or null
-        try {
-            $this->assertIsArray($result);
-        } catch (Exception $e) {
-            $this->assertNull($result);
-        }
     }
 
     function testLogsMessages(){

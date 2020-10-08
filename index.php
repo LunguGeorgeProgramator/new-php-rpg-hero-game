@@ -1,14 +1,16 @@
 <LINK REL=StyleSheet HREF="custom.css" TITLE="Contemporary">
 <?php
 include 'class/database.php';
+include 'class/player.php';
 include 'class/hero.php';
-include 'class/heroBuild.php';
 include 'class/monster.php';
-include 'class/monsterBuild.php';
 include 'class/gameEngineClass.php';
+include 'class/playerFactory.php';
 include 'class/logger.php';
+
 session_start();
 // session_destroy();
+
 ?>
     <form method="POST" style="float: left">
         <input type="submit" name="next_attack" value="Next turn (apasa aici/click here).">
