@@ -12,8 +12,8 @@ use PHPUnit\Framework\TestCase;
 
 final class GameTest extends TestCase
 {
-
-    private function populateHero(){
+    private function populateHero()
+    {
         $hero = new Hero();
         $hero->setId(1);
         $hero->setLevel(5);
@@ -27,7 +27,8 @@ final class GameTest extends TestCase
         return $hero;
     }
 
-    private function populateMonster(){
+    private function populateMonster()
+    {
         $monster = new Monster();
         $monster->setId(1);
         $monster->setLevel(2);
@@ -41,7 +42,7 @@ final class GameTest extends TestCase
         return $monster;
     }
 
-    function testFirstTurnFunction()
+    public function testFirstTurnFunction()
     {
         $engine = new engine;
         $hero = $this->populateHero();
@@ -52,14 +53,10 @@ final class GameTest extends TestCase
         $this->assertNotEmpty($result);
     }
 
-    function testLogsMessages(){
+    public function testLogsMessages()
+    {
         $engine = new engine;
         $results = $engine->figth($this->populateHero(), $this->populateMonster(), [], 1, Logger::getInstance());
         $this->assertStringContainsString('Damage', $results[5]->getLog());
-
     }
-    
-
-
-    
 }

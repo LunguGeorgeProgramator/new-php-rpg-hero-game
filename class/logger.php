@@ -1,9 +1,10 @@
 <?php
-class Logger {
+class Logger
+{
     private $log;
-    static function getInstance()
+    public static function getInstance()
     {
-        if (self::$instance == NULL) {
+        if (self::$instance == null) {
             self::$instance = new Logger();
         }
         return self::$instance;
@@ -13,17 +14,14 @@ class Logger {
     }
     private function __clone()
     {
-        
     }
-    function Log($str)
+    public function Log($str)
     {
         $this->log .= $str;
     }
     public function getLog()
     {
-      return $this->log;
+        return $this->log;
     }
-    static private $instance = NULL;
+    private static $instance = null;
 }
-
-?>

@@ -20,23 +20,23 @@ session_start();
 
 $game = new engine;
 
-if(!isset($_SESSION['turn'])){
+if (!isset($_SESSION['turn'])) {
     $_SESSION['turn'] = [];
 }
 
-if(!isset($_SESSION['turnCounter'])){
+if (!isset($_SESSION['turnCounter'])) {
     $_SESSION['turnCounter'] = 0;
 }
 
-if(!isset($_SESSION['hero'])){
+if (!isset($_SESSION['hero'])) {
     $_SESSION['hero'] =  $game->hero;
 }
 
-if(!isset($_SESSION['monster'])){
+if (!isset($_SESSION['monster'])) {
     $_SESSION['monster'] =  $game->monster;
 }
 
-if(!isset($_SESSION['battle_logs'])){
+if (!isset($_SESSION['battle_logs'])) {
     $_SESSION['battle_logs'] = Logger::getInstance();
 }
 
@@ -83,9 +83,9 @@ Click this button "Next Turn" !!!!.
 // echo $_SESSION['battle_logs'];
 echo $_SESSION['battle_logs']->getLog();
 
-if(isset($results) && $results[3] === true){
+if (isset($results) && $results[3] === true) {
     session_destroy();
-} 
+}
 
 ?>
 

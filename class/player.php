@@ -1,7 +1,7 @@
 <?php
 
-class Player {
-
+class Player
+{
     private $id;
     private $level;
     private $experience;
@@ -13,85 +13,103 @@ class Player {
     private $luck;
     private $stats;
 
-    function getId(){
+    public function getId()
+    {
         return $this->id;
     }
 
-    function getLevel(){
+    public function getLevel()
+    {
         return $this->level;
     }
 
-    function getExperience(){
+    public function getExperience()
+    {
         return $this->experience;
     }
 
-    function getName(){
+    public function getName()
+    {
         return $this->name;
     }
 
-    function getHealth(){
+    public function getHealth()
+    {
         return $this->health;
     }
 
-    function getStrength(){
+    public function getStrength()
+    {
         return $this->strength;
     }
 
-    function getDefence(){
+    public function getDefence()
+    {
         return $this->defence;
     }
     
-    function getSpeed(){
+    public function getSpeed()
+    {
         return $this->speed;
     }
 
-    public function getLuck(){
+    public function getLuck()
+    {
         return $this->luck;
     }
 
-    public function getStats(){
+    public function getStats()
+    {
         return $this->stats;
     }
 
-    function setId($id){
+    public function setId($id)
+    {
         $this->id = $id;
     }
 
-    function setLevel($level){
+    public function setLevel($level)
+    {
         $this->level = $level;
     }
 
-    function setExperience($experience){
+    public function setExperience($experience)
+    {
         $this->experience = $experience;
     }
 
-    function setName($name){
+    public function setName($name)
+    {
         $this->name = $name;
     }
 
-    function setHealth($health){
+    public function setHealth($health)
+    {
         $this->health = $health;
     }
 
-    function setStrength($strength){
+    public function setStrength($strength)
+    {
         $this->strength = $strength;
     }
 
-    function setDefence($defence){
+    public function setDefence($defence)
+    {
         $this->defence = $defence;
     }
 
-    function setSpeed($speed){
+    public function setSpeed($speed)
+    {
         $this->speed = $speed;
     }
 
-    public function setLuck($luck){
+    public function setLuck($luck)
+    {
         $this->luck = $luck;
     }
 
-    public function setStats($stats){
+    public function setStats($stats)
+    {
         $this->stats = $stats;
     }
-
 }
-?>

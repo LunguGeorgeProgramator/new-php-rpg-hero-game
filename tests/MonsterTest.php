@@ -7,8 +7,8 @@ use PHPUnit\Framework\TestCase;
 
 final class MonsterTest extends TestCase
 {
-
-    private function populateMonster(){
+    private function populateMonster()
+    {
         $monster = new Monster();
         $monster->setId(1);
         $monster->setLevel(2);
@@ -22,7 +22,7 @@ final class MonsterTest extends TestCase
         return $monster;
     }
 
-    function testMonster()
+    public function testMonster()
     {
         $monster = $this->populateMonster();
 
@@ -40,14 +40,13 @@ final class MonsterTest extends TestCase
         $this->assertNotEmpty($monster);
     }
     
-    function testMonsterUpdate()
+    public function testMonsterUpdate()
     {
         $monster = $this->populateMonster();
-        $monster->setName('BUC');  
-        $monster->setLevel(5); 
+        $monster->setName('BUC');
+        $monster->setLevel(5);
 
         $this->assertSame($monster->getLevel(), 5);
         $this->assertSame($monster->getName(), 'BUC');
     }
-
 }

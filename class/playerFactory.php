@@ -1,11 +1,11 @@
 <?php
-class PlayerFactory {
-
-    public function createPlayer($player, $player_id=1){
-
-        if($player === "hero") {
+class PlayerFactory
+{
+    public function createPlayer($player, $player_id=1)
+    {
+        if ($player === "hero") {
             $player_obj = new Hero();
-        }else if($player === "monster") {
+        } elseif ($player === "monster") {
             $player_obj = new Monster();
         }
 
@@ -13,15 +13,14 @@ class PlayerFactory {
         $player_obj = $this->getDBStats($player_obj, $player);
 
         return $player_obj;
-        
     }
 
-    public function getDBResults($player_obj, $player, $player_id=1){
-        
+    public function getDBResults($player_obj, $player, $player_id=1)
+    {
         $db = new DataBase;
 
         $player_DB = $db->runQuery(
-            'SELECT * FROM '.$player.' where id=' . $player_id 
+            'SELECT * FROM '.$player.' where id=' . $player_id
         );
 
         $player_obj->setId($player_DB[0]['id']);
@@ -32,8 +31,8 @@ class PlayerFactory {
         return $player_obj;
     }
 
-    public function getDBStats($player_obj, $player){
-
+    public function getDBStats($player_obj, $player)
+    {
         $db = new DataBase;
 
         $stats_player = $db->runQuery(
@@ -50,7 +49,7 @@ class PlayerFactory {
             'luck' => 0,
         ];
 
-        foreach($stats_player as $stat){
+        foreach ($stats_player as $stat) {
             $stats[$stat['subject_attribute']] = rand($stat['min'], $stat['max']);
         }
 
@@ -63,6 +62,4 @@ class PlayerFactory {
        
         return $player_obj;
     }
-
 }
-?>

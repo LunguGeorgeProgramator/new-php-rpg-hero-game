@@ -7,7 +7,8 @@ use PHPUnit\Framework\TestCase;
 
 final class HeroTest extends TestCase
 {
-    private function populateHero(){
+    private function populateHero()
+    {
         $hero = new Hero();
         $hero->setId(1);
         $hero->setLevel(2);
@@ -37,20 +38,20 @@ final class HeroTest extends TestCase
         $this->assertSame($hero->getSpeed(), 23);
         $this->assertSame($hero->getLuck(), 1);
         $this->assertNotEmpty($hero);
-        
     }
     
     public function testHeroUpdate()
     {
         $hero = $this->populateHero();
-        $hero->setName('YYY');  
-        $hero->setLevel(5); 
+        $hero->setName('YYY');
+        $hero->setLevel(5);
 
         $this->assertSame($hero->getLevel(), 5);
         $this->assertSame($hero->getName(), 'YYY');
     }
 
-    function testSkillsFunction(){
+    public function testSkillsFunction()
+    {
         $hero = $this->populateHero();
         $result = $hero->skills(); // function gives 2 resonses return random array of results or null
         try {
@@ -59,5 +60,4 @@ final class HeroTest extends TestCase
             $this->assertNull($result);
         }
     }
-
 }
