@@ -93,52 +93,5 @@ class Player {
         $this->stats = $stats;
     }
 
-    public function getDBResults($player, $player_id=1){
-        
-        $db = new DataBase;
-
-        $player_DB = $db->runQuery(
-            'SELECT * FROM '.$player.' where id=' . $player_id 
-        );
-
-        $this->setId($player_DB[0]['id']);
-        $this->setLevel($player_DB[0]['level']);
-        $this->setExperience($player_DB[0]['experience']);
-        $this->setName($player_DB[0]['name']);
-
-        return $this;
-    }
-
-    public function getDBStats($player){
-
-        $db = new DataBase;
-
-        $stats_player = $db->runQuery(
-            'SELECT *
-             FROM `attributes_max_min` 
-             WHERE subject_type="'.$player.'" and subject_id='.$this->getId()
-        );
-
-        $stats = [
-            'health' => 0,
-            'strength' => 0,
-            'defence' => 0,
-            'speed' => 0,
-            'luck' => 0,
-        ];
-
-        foreach($stats_player as $stat){
-            $stats[$stat['subject_attribute']] = rand($stat['min'], $stat['max']);
-        }
-
-        $this->setHealth($stats['health']);
-        $this->setStrength($stats['strength']);
-        $this->setDefence($stats['defence']);
-        $this->setSpeed($stats['speed']);
-        $this->setLuck($stats['luck']);
-        $this->setStats($stats_player);
-       
-        return $this;
-    }
 }
 ?>
