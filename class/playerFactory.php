@@ -7,6 +7,8 @@ class PlayerFactory
             $player_obj = new Hero();
         } elseif ($player === "monster") {
             $player_obj = new Monster();
+            $monster_encounter = (new DataBase)->runQuery('SELECT `id` FROM `monster` ORDER BY RAND() LIMIT 0,1;'); // for random id's
+            $player_id = $monster_encounter[0]['id'];
         }
 
         $player_obj = $this->getDBResults($player_obj, $player, $player_id);

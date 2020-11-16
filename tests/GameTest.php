@@ -59,4 +59,9 @@ final class GameTest extends TestCase
         $results = $engine->figth($this->populateHero(), $this->populateMonster(), [], 1, Logger::getInstance());
         $this->assertStringContainsString('Damage', $results[5]->getLog());
     }
+
+    public function testMonsterCall(){
+        $engine = new engine;
+        var_dump($engine->monster());
+    }
 }

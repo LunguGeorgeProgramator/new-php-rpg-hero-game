@@ -13,16 +13,14 @@ class engine
 
     public function hero()
     {
-        $buildHero = new PlayerFactory;
-        return $buildHero->createPlayer('hero');
+        $build_hero = new PlayerFactory;
+        return $build_hero->createPlayer('hero');
     }
 
     public function monster()
     {
-        // $monsterEncounter = (new DataBase)->runQuery('SELECT `id` FROM `monster` ORDER BY RAND() LIMIT 0,1;');
-        $monsterEncounter = (new DataBase)->runQuery('SELECT `id` FROM `monster` where id = 1');
-        $buildMonster = new PlayerFactory;
-        return $buildMonster->createPlayer('monster', $monsterEncounter[0]['id']);
+        $build_monster = new PlayerFactory;
+        return $build_monster->createPlayer('monster');
     }
 
     public function figth($hero, $monster, $turn, $turnCounter = 1, $log_pass = '')
