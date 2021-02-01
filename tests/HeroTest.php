@@ -1,7 +1,8 @@
 <?php
 
-include_once 'class/player.php';
-include_once 'class/hero.php';
+require 'vendor/autoload.php';
+
+use GameEngine\Hero as Hero;
 
 use PHPUnit\Framework\TestCase;
 

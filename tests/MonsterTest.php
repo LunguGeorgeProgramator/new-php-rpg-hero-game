@@ -1,7 +1,6 @@
 <?php
-
-include_once 'class/player.php';
-include_once 'class/monster.php';
+require 'vendor/autoload.php';
+use GameEngine\Monster as Monster;
 
 use PHPUnit\Framework\TestCase;
 

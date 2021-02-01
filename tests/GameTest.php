@@ -1,12 +1,12 @@
 <?php
+require 'vendor/autoload.php';
 
-include_once 'class/database.php';
-include_once 'class/player.php';
-include_once 'class/hero.php';
-include_once 'class/monster.php';
-include_once 'class/playerFactory.php';
-include_once 'class/gameEngineClass.php';
-include_once 'class/logger.php';
+use GameEngine\engine;
+use GameEngine\Hero;
+use GameEngine\Monster;
+use GameEngine\Logger;
+use GameEngine\Player;
+use GameEngine\PlayerFactory;
 
 use PHPUnit\Framework\TestCase;
 
@@ -60,8 +60,8 @@ final class GameTest extends TestCase
         $this->assertStringContainsString('Damage', $results[5]->getLog());
     }
 
-    public function testMonsterCall(){
-        $engine = new engine;
-        var_dump($engine->monster());
-    }
+    // public function testMonsterCall(){
+    //     $engine = new engine;
+    //     // var_dump($engine->monster());
+    // }
 }

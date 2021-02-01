@@ -1,13 +1,14 @@
 <?php
-include_once 'class/logger.php';
+require 'vendor/autoload.php';
 
 use PHPUnit\Framework\TestCase;
 
 final class LoggerTest extends TestCase
 {
     public function testLogInstance(){
-        $log = new Logger;
-        $this->assertNotNull($log->getLog());
+        $log = GameEngine\Logger::getInstance();
+        $log->Log('Attack test log set');
+        $this->assertStringStartsWith('Attack', $log->getLog());
     }
 }
 ?>
