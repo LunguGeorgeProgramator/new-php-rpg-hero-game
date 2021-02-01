@@ -5,8 +5,6 @@ use GameEngine\engine;
 use GameEngine\Hero;
 use GameEngine\Monster;
 use GameEngine\Logger;
-use GameEngine\Player;
-use GameEngine\PlayerFactory;
 
 use PHPUnit\Framework\TestCase;
 
