@@ -1,4 +1,5 @@
 <?php
+namespace GameEngine;
 
 class engine
 {
@@ -25,6 +26,8 @@ class engine
 
     public function figth($hero, $monster, $turn, $turnCounter = 1, $log_pass = '')
     {
+        if(empty($log_pass))
+            $log_pass = Logger::getInstance();
         $attacker = null;
         $defender = null;
         $stop_battle = false;

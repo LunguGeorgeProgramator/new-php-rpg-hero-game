@@ -1,12 +1,6 @@
 <LINK REL=StyleSheet HREF="custom.css" TITLE="Contemporary">
 <?php
-include 'class/database.php';
-include 'class/player.php';
-include 'class/hero.php';
-include 'class/monster.php';
-include 'class/gameEngineClass.php';
-include 'class/playerFactory.php';
-include 'class/logger.php';
+require 'vendor/autoload.php';
 
 session_start();
 // session_destroy();
@@ -18,7 +12,7 @@ session_start();
     </br>
 <?php
 
-$game = new engine;
+$game = new GameEngine\engine;
 
 if (!isset($_SESSION['turn'])) {
     $_SESSION['turn'] = [];
@@ -37,7 +31,7 @@ if (!isset($_SESSION['monster'])) {
 }
 
 if (!isset($_SESSION['battle_logs'])) {
-    $_SESSION['battle_logs'] = Logger::getInstance();
+    $_SESSION['battle_logs'] = '';
 }
 
 $results = $game->figth($_SESSION['hero'], $_SESSION['monster'], $_SESSION['turn'], $_SESSION['turnCounter'], $_SESSION['battle_logs']);

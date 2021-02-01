@@ -1,4 +1,5 @@
 <?php
+    namespace GameEngine;
     class DataBase
     {
         private $servername;
@@ -26,7 +27,7 @@
         private function connectDB()
         {
             if ($this->conn === false) {
-                $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+                $this->conn = new \mysqli($this->servername, $this->username, $this->password, $this->dbname);
                 if ($this->conn->connect_error) {
                     die("Connection failed: " .$this->conn->connect_error);
                 }

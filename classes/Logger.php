@@ -1,4 +1,5 @@
 <?php
+namespace GameEngine;
 class Logger
 {
     private $log;

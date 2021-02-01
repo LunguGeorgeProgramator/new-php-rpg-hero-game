@@ -1,4 +1,5 @@
 <?php
+namespace GameEngine;
 class PlayerFactory
 {
     public function createPlayer($player, $player_id=1)

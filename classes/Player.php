@@ -1,5 +1,5 @@
 <?php
-
+namespace GameEngine;
 class Player
 {
     private $id;

@@ -1,5 +1,5 @@
 <?php
-
+namespace GameEngine;
 class Hero extends Player
 {
     public function skills()

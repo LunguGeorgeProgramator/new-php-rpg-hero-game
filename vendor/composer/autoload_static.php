@@ -28,6 +28,10 @@ class ComposerStaticInit5db7762d765ef88dd465900b88ffb2f3
         array (
             'Prophecy\\' => 9,
         ),
+        'G' => 
+        array (
+            'GameEngine\\' => 11,
+        ),
         'D' => 
         array (
             'Doctrine\\Instantiator\\' => 22,
@@ -53,6 +57,10 @@ class ComposerStaticInit5db7762d765ef88dd465900b88ffb2f3
         'Prophecy\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy',
+        ),
+        'GameEngine\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/classes',
         ),
         'Doctrine\\Instantiator\\' => 
         array (
